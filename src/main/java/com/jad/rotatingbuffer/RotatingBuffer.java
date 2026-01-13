@@ -10,7 +10,11 @@ public class RotatingBuffer<E> {
 
     @SuppressWarnings("unchecked")
     public RotatingBuffer(final int size) {
-        this.size = size <= 0 ? 1 : size;
+        if (size <= 0) {
+            this.size = 1;
+        } else {
+            this.size = size;
+        }
         this.data = (E[]) new Object[this.size];
         this.count = 0;
         this.reader = new RotatingBufferReader<>(this);
